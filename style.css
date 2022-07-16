@@ -1,0 +1,16 @@
+:root{
+    --smoky-black: #0B0A07;
+    --middle-blue: #92DCE5;
+    --cultured: #F8F7F9;
+    --corn: #F7EC59;
+    --rose-pink: #FF66D8;
+}
+body{
+    background-color: var(--corn);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+main{
+    margin: auto;
+}
