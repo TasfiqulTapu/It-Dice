@@ -6,9 +6,8 @@ class Hand{
         this.restruct = false;
     }
     draw(){
-        rectMode(CENTER);
-        fill(Colors["mb"]);
-        rect(this.x, this.y, 270, 90);
+        imageMode(CENTER);
+        image(art["hand"],this.x, this.y, 270, 90);
         this.dice.forEach(function(dice){
             dice.draw();
         })
@@ -25,6 +24,7 @@ class Hand{
             dice.x = this.x - 90 + (this.dice.length * 90);
             dice.y = this.y;
             dice.state = "hand";
+            this.restruct = true;
             this.dice.push(dice);
         }
     }

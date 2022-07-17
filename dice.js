@@ -32,13 +32,80 @@ class Dice{
         this.state = "none";
     }
     draw(){
-        fill(Colors["cu"]);
-        rectMode(CENTER);
-        rect(this.x, this.y, 65, 65);
-        fill(Colors["rp"]);
-        textSize(30);
-        textAlign(CENTER, CENTER);
-        text(this.value, this.x, this.y);
+        imageMode(CENTER);
+        image(art["dice"], this.x, this.y, 65, 65);
+        switch (this.attack + this.health) {
+            case 1:
+                image(art["heart"],this.x, this.y, 8, 8);
+                break;
+            case 2:
+                if(this.health == 1){
+                image(art["sword"],this.x + 16, this.y - 16, 8, 8);
+                image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                }else{                    
+                    image(art["sword"],this.x + 16, this.y - 16, 8, 8);
+                    image(art["sword"],this.x - 16, this.y + 16, 8, 8);
+                }
+                break;
+            case 3:
+                if(this.health == 2){
+                    image(art["sword"],this.x, this.y, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                }else if(this.health == 1){
+                    image(art["sword"],this.x + 16, this.y - 16, 8, 8);
+                    image(art["sword"],this.x, this.y, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    }else{                    
+                        image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                        image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                        image(art["heart"],this.x, this.y, 8, 8);
+                    }
+                break;
+                case 4:
+                if(this.health == 2){
+                    image(art["sword"],this.x - 16, this.y - 16, 8, 8);
+                    image(art["sword"],this.x + 16, this.y - 16, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y + 16, 8, 8);
+                }else if(this.health == 3){
+                    image(art["sword"],this.x - 16, this.y - 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                    }else{                    
+                        image(art["sword"],this.x - 16, this.y - 16, 8, 8);
+                        image(art["sword"],this.x + 16, this.y + 16, 8, 8);
+                        image(art["sword"],this.x - 16, this.y + 16, 8, 8);
+                        image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                    }
+                break;
+                case 5:
+                if(this.health == 2){
+                    image(art["sword"],this.x, this.y, 8, 8);
+                    image(art["sword"],this.x - 16, this.y - 16, 8, 8);
+                    image(art["sword"],this.x + 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                }else if(this.health == 3){
+                    image(art["sword"],this.x + 16, this.y + 16, 8, 8);
+                    image(art["sword"],this.x - 16, this.y - 16, 8, 8);
+                    image(art["heart"],this.x, this.y, 8, 8);
+                    image(art["heart"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                    }
+                break;
+                case 6:
+                    image(art["sword"],this.x, this.y + 16, 8, 8);
+                    image(art["sword"],this.x - 16, this.y + 16, 8, 8);
+                    image(art["sword"],this.x + 16, this.y + 16, 8, 8);
+                    image(art["heart"],this.x, this.y - 16, 8, 8);
+                    image(art["heart"],this.x - 16, this.y - 16, 8, 8);
+                    image(art["heart"],this.x + 16, this.y - 16, 8, 8);
+                    break;
+            default:
+                break;
+        }
     }
     mouseOver(){
         if(this.state == "hand"){
@@ -48,4 +115,8 @@ class Dice{
         }
         return false;
     }
+}
+
+function rollDice(){
+    return 6 - Math.floor(Math.sqrt(Math.random() * 36)) ;
 }

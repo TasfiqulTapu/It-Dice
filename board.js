@@ -6,9 +6,13 @@ class Board{
         this.enemy = enemy;
     }
     draw(){
-        rectMode(CENTER);;
-        fill(Colors["mb"]);
-        rect(width/2, height/2, this.width, this.height);
+        fill("#ffaa5e"); 
+        textAlign(CENTER, CENTER);
+        textSize(15);
+        text(this.enemy.name, width/2 + this.width/2 - 20, height/2 - this.height / 2 - 10);
+        imageMode(CENTER);
+        image(art[this.enemy.name],width/2, height/4 - 45, 150, 150);
+        image(art["board"],width/2, height/2, this.width, this.height);
         this.board[0].forEach(function(dice){
             if(dice == '')return;
             dice.draw();
@@ -86,8 +90,10 @@ class Board{
         if(gamestate=="opponent"){
             for(let i = 0; i< floor(random(1,3)); i++){
                 let slot = floor(random(0,3));
-                this.opponentAdd(opponentDice[0], slot);
-                opponentDice.shift();
+                if(opponentDice.length > 1){
+                    this.opponentAdd(opponentDice[0], slot);
+                    opponentDice.shift();
+                }
             }
             gamestate = "animation2";
         }
@@ -105,6 +111,15 @@ class Board{
                 }
             }
             for(let i = 0; i< floor(random(0,2)); i++){
+                playerHand.add(playerDice[0]);
+                playerDice.shift();
+            }
+            if(playerDice.length < 1){
+                for(let i = 0; i < 20; i++){
+                    playerDice.push(new Dice(rollDice(), -100, -100));
+                }
+            }
+            if(playerHand.dice.length == 0){
                 playerHand.add(playerDice[0]);
                 playerDice.shift();
             }
